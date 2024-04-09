@@ -1,4 +1,5 @@
 import os
+from pprint import pprint
 
 import yaml
 
@@ -32,3 +33,7 @@ class DataGetter:
             return parametrize_data
         except Exception as e:
             print(e)
+
+
+if __name__ == '__main__':
+    pprint(DataGetter.get_parametrize_data())
