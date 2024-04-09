@@ -1,11 +1,11 @@
 import pytest
 import requests
 
-from tests.test_learning.conftest import parametrize_data
+from util.read_data import DataGetter
 
 
 @pytest.mark.learning
-@pytest.mark.parametrize('list, cache, lang, expect_code, expect_msg', parametrize_data['test_hot'])
+@pytest.mark.parametrize('list, cache, lang, expect_code, expect_msg', DataGetter.get_parametrize_data()['test_hot'])
 def test_hot_parametrize(list, cache, lang, expect_code, expect_msg):
     param = {
         'list': list,

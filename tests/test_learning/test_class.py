@@ -3,7 +3,8 @@ import pytest
 
 @pytest.mark.learning
 class TestClass:
-    value = 0
+    def setup_class(self):
+        self.value = 2
 
     def test_one(self):
         print('test_one')
