@@ -2,7 +2,15 @@ import os
 
 import pytest
 
+from api.api_learning import ApiLearning
 from util.read_data import *
+
+
+@pytest.fixture(scope='package', autouse=True)
+def api():
+    print('get api!!!')
+    api_learning = ApiLearning()
+    return api_learning
 
 
 @pytest.fixture(scope='function')
