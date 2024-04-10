@@ -13,3 +13,7 @@ def test_mark():
 def test_mark2():
     print('test_mark2')
     assert True
+
+
+if __name__ == '__main__':
+    pytest.main()

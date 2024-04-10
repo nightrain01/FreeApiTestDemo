@@ -6,7 +6,7 @@ from api.api_learning import ApiLearning
 from util.read_data import *
 
 
-@pytest.fixture(scope='package', autouse=True)
+@pytest.fixture(scope='package')
 def api():
     print('get api!!!')
     api_learning = ApiLearning()
