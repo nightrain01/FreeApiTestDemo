@@ -2,8 +2,7 @@ import yaml
 
 
 class DataReader:
-    @staticmethod
-    def read_yaml_data(path):
+    def read_yaml_data(self, path):
         try:
             with open(path, 'r', encoding='utf-8') as f:
                 data = yaml.safe_load(f)

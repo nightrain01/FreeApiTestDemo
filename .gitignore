@@ -1,5 +1,7 @@
 ### Example user template template
 ### Example user template
+# Allure report files
+reports/
 
 # IntelliJ project files
 .idea

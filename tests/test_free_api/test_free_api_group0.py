@@ -19,6 +19,9 @@ class TestFreeApiGroup0:
         assert expect_code == res_json['code']
         assert expect_msg == res_json['msg']
 
+    def test_tmp(self):
+        assert True
+
 
 if __name__ == '__main__':
     pytest.main()
