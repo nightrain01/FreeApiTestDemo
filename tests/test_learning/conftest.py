@@ -3,11 +3,10 @@ import os
 import pytest
 
 from api.api_learning import ApiLearning
-from util.read_data import *
 
 
 @pytest.fixture(scope='package')
-def api():
+def api_learning():
     print('get api!!!')
     api_learning = ApiLearning()
     return api_learning

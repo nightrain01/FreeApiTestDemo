@@ -1,25 +1,32 @@
 import pytest
-import requests
 
-from util.read_data import DataGetter
-
-
-@pytest.mark.learning
-@pytest.mark.parametrize('list, cache, lang, expect_code, expect_msg', DataGetter.get_parametrize_data()['test_hot'])
-def test_hot_parametrize(api, list, cache, lang, expect_code, expect_msg):
-    res = api.hot(list, cache, lang)
-    res_json = res.json()
-    assert res_json['code'] == expect_code
-    assert res_json['msg'] == expect_msg
+from util.data.data_getters.learning_data_getter import LearningDataGetter
 
 
-@pytest.mark.learning
-@pytest.mark.parametrize('list, cache, lang, expect_code, expect_msg', DataGetter.get_parametrize_data()['test_hot'])
-def test_hot_parametrize_copy(api, list, cache, lang, expect_code, expect_msg):
-    res = api.hot(list, cache, lang)
-    res_json = res.json()
-    assert res_json['code'] == expect_code
-    assert res_json['msg'] == expect_msg
+class TestParametrize:
+    data_getter = LearningDataGetter()
+    data = data_getter.get_parametrize_data()
+
+    @pytest.fixture(autouse=True)
+    def get_api(self, api_learning):
+        print('get api in class')
+        self.api = api_learning
+
+    @pytest.mark.learning
+    @pytest.mark.parametrize('list, cache, lang, expect_code, expect_msg', data['test_hot'])
+    def test_hot_parametrize(self, list, cache, lang, expect_code, expect_msg):
+        res = self.api.hot(list, cache, lang)
+        res_json = res.json()
+        assert res_json['code'] == expect_code
+        assert res_json['msg'] == expect_msg
+
+    @pytest.mark.learning
+    @pytest.mark.parametrize('list, cache, lang, expect_code, expect_msg', data['test_hot'])
+    def test_hot_parametrize_copy(self, list, cache, lang, expect_code, expect_msg):
+        res = self.api.hot(list, cache, lang)
+        res_json = res.json()
+        assert res_json['code'] == expect_code
+        assert res_json['msg'] == expect_msg
 
 
 if __name__ == '__main__':
