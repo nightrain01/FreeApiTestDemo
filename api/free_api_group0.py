@@ -3,7 +3,7 @@ from urllib.parse import urljoin
 import requests
 
 
-class ApiLearning:
+class FreeApiGroup0:
     def __init__(self):
         self.base_url = 'https://test.harumoe.cn/'
 

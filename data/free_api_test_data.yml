@@ -1,9 +1,0 @@
-test_hot:
-  #网站列表，是否缓存，语言，期望返回码，期望返回信息
-  #list, cache, lang, expect_code, expect_msg
-  - ['csdn', False, 'zh-cn', 200, '数据请求成功！']
-  - ['csdn', True, 'zh-cn', 200, '数据请求成功！']
-  - ['csdn', True, None, 200, '数据请求成功！']
-  - ['baidu', False, 'zh-cn', 200, '数据请求成功！']
-  - ['csdn', False, 'ru-ru', 200, 'Запрос данных выполнен успешно !']
-  - ['aaa', False, 'zh-cn', 404, '数据请求失败！']

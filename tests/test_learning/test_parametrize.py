@@ -3,6 +3,7 @@ import pytest
 from util.data.data_getters.learning_data_getter import LearningDataGetter
 
 
+@pytest.mark.learning
 class TestParametrize:
     data_getter = LearningDataGetter()
     data = data_getter.get_parametrize_data()

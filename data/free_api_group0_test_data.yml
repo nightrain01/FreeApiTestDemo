@@ -1,0 +1,23 @@
+test_hot:
+  #网站列表，是否缓存，语言，期望返回码，期望返回信息
+  #list, cache, lang, expect_code, expect_msg
+  - ['csdn', False, 'zh-cn', 200, '数据请求成功！']
+
+  - ['baidu', False, 'zh-cn', 200, '数据请求成功！']
+  - ['csdn,baidu', False, 'zh-cn', 200, '数据请求成功！']
+  - ['a567aa', False, 'zh-cn', 404, '数据请求失败！']
+  - ['', False, 'zh-cn', 404, '数据请求失败！']
+  - [None, False, 'zh-cn', 404, '数据请求失败！']
+
+  - ['csdn', True, 'zh-cn', 200, '数据请求成功！']
+  - ['csdn', None, 'zh-cn', 200, '数据请求成功！']
+  - ['csdn', 123, 'zh-cn', 404, '数据请求失败！']
+  - ['csdn', 'alkm', 'zh-cn', 404, '数据请求失败！']
+
+  - ['csdn', False, None, 200, '数据请求成功！']
+  - ['csdn', False, '', 200, '数据请求成功！']
+  - ['csdn', False, 'ru-ru', 200, 'Запрос данных выполнен успешно !']
+  - ['csdn', False, 'en-us', 200, 'Data request successful!']
+  - ['csdn', False, 'ja-jp', 200, 'データ要求成功！']
+  - ['csdn', False, 'ko-kr', 200, '데이터 요청 성공!']
+  - ['csdn', False, 'abc-cba', 404, '数据请求失败！']
