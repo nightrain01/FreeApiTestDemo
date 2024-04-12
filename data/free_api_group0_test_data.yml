@@ -1,6 +1,6 @@
 test_hot:
   #用例标题，网站列表，是否缓存，语言，期望返回码，期望返回信息
-  #usecase_title, list, cache, lang, expect_code, expect_msg
+  #testcase_title, list, cache, lang, expect_code, expect_msg
   - [ '查询csdn热搜，查询成功', 'csdn', False, 'zh-cn', 200, '数据请求成功！' ]
 
   - [ '查询多个网站热搜，查询成功', 'csdn,baidu', False, 'zh-cn', 200, '数据请求成功！' ]
