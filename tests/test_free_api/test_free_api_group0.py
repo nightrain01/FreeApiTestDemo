@@ -2,6 +2,7 @@ import allure
 import pytest
 
 from util.data.data_getters.free_api_data_getter import FreeApiDataGetter
+from util.get_ip import get_ip
 
 
 @allure.epic('测试免费Api')
@@ -40,8 +41,7 @@ class TestFreeApiGroup0:
         if ip is not None:
             assert ip == res.json()['ip']
         else:
-            # 姑且凑合一下（
-            assert '本机ip（' == res.json()['ip']
+            assert get_ip() == res.json()['ip']
 
 
 if __name__ == '__main__':

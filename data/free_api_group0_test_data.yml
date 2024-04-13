@@ -27,6 +27,6 @@ test_ip:
   - [ '8.8.8.8', 200, '查询8.8.8.8ip详细信息，查询成功', '描述1', 'https://www.baidu.com/', '虚假的issue（百度）' ]
   - [ null, 200, '查询本机ip详细信息，查询成功', '描述2', 'https://www.baidu.com/', '虚假的issue（百度）' ]
 
-  - [ '', 400, '查询空ip详细信息，查询成功', '描述3', 'https://www.baidu.com/', '虚假的issue（百度）' ]
-  - [ '8.8.8.', 400, '查询不完整ip详细信息，查询成功', '描述4', 'https://www.baidu.com/', '虚假的issue（百度）' ]
-  - [ 'avs1d9', 400, '查询非法ip详细信息，查询成功', '描述5', 'https://www.baidu.com/', '虚假的issue（百度）' ]
+  - [ '', 400, '查询空ip详细信息，查询失败', '描述3', 'https://www.baidu.com/', '虚假的issue（百度）' ]
+  - [ '8.8.8.', 400, '查询不完整ip详细信息，查询失败', '描述4', 'https://www.baidu.com/', '虚假的issue（百度）' ]
+  - [ 'avs1d9', 400, '查询非法ip详细信息，查询失败', '描述5', 'https://www.baidu.com/', '虚假的issue（百度）' ]
