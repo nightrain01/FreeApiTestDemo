@@ -1,6 +1,6 @@
 import os
 
-from util.data.data_getters.base_data_getter import BaseDataGetter
+from data.data_getters.base_data_getter import BaseDataGetter
 
 
 class LearningDataGetter(BaseDataGetter):

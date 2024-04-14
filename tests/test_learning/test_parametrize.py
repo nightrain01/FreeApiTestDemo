@@ -1,6 +1,6 @@
 import pytest
 
-from util.data.data_getters.learning_data_getter import LearningDataGetter
+from data.data_getters.learning_data_getter import LearningDataGetter
 
 
 @pytest.mark.learning

@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from util.data.data_getters.free_api_data_getter import FreeApiDataGetter
+from data.data_getters.free_api_data_getter import FreeApiDataGetter
 from util.get_ip import get_ip
 
 

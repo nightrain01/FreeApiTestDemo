@@ -39,7 +39,7 @@ class RuoyiVueApi:
         self.session = requests.Session()
         self._session_init()
 
-    def login_with_retry(self, username='admin', password='admin123', retry_times=5):
+    def login(self, username='admin', password='admin123', retry_times=5):
         """
         带重试的登录
         验证码识别不是很准！
@@ -49,17 +49,17 @@ class RuoyiVueApi:
         :param retry_times: 重试次数
         :return:
         """
-        res = self.login(username, password)
+        res = self._login(username, password)
         res_json = res.json()
         for i in range(retry_times):
             if res_json['code'] == 500 and res_json['msg'] == '验证码错误':
-                res = self.login(username, password)
+                res = self._login(username, password)
                 res_json = res.json()
             else:
                 break
         return res
 
-    def login(self, username='admin', password='admin123'):
+    def _login(self, username='admin', password='admin123'):
         """
         登录
         :param username:
@@ -106,8 +106,8 @@ class RuoyiVueApi:
             res_json = res.json()
             token = res_json['token']
             self.session.headers.update({'Authorization': f'Bearer {token}'})
-        except Exception as e:
-            print(e)
+        except KeyError as e:
+            print(f'KeyError:{e}')
 
     def _get_captcha_image(self):
         """
@@ -124,8 +124,8 @@ class RuoyiVueApi:
 
 if __name__ == '__main__':
     api = RuoyiVueApi()
-    print(api.login_with_retry().json())
-    # print(api.login().json())
+    print(api.login('asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf', 'aaa').json())
+    print(api.login().json())
     print(api.get_info().json())
     print(api.logout().json())
     print(api.get_info().json())

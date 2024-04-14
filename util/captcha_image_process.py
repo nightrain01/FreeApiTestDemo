@@ -72,7 +72,6 @@ def calculate_captcha_recognition_get_ruoyi_captcha(captcha_img_base64):
     img = Image.open(io.BytesIO(img_data))
     trans = transforms.Compose([
         transforms.Resize((60, 160)),
-        # transforms.Grayscale(),
         transforms.ToTensor()
     ])
     img_tensor = trans(img)

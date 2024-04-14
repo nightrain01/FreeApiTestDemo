@@ -9,7 +9,13 @@ def get_testcase_params(request):
     """
     获取测试运行时的参数
     """
-    return request.node.callspec.params
+    params = {}
+    try:
+        params = request.node.callspec.params
+    except Exception as e:
+        print(e)
+    finally:
+        return params
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -17,7 +23,7 @@ def allure_parameters_filter(get_testcase_params):
     """
     在allure报告中，过滤掉testcase_*，expect_*一类的参数
     """
-    # yield
+    yield
     pattern = r'^(testcase_|expect_|issue_)(.+)'
     for key, value in get_testcase_params.items():
         if re.match(pattern, key):
