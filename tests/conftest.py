@@ -23,7 +23,6 @@ def allure_parameters_filter(get_testcase_params):
     """
     在allure报告中，过滤掉testcase_*，expect_*一类的参数
     """
-    yield
     pattern = r'^(testcase_|expect_|issue_)(.+)'
     for key, value in get_testcase_params.items():
         if re.match(pattern, key):
