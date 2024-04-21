@@ -13,7 +13,7 @@ class RuoyiVueApi:
     """
 
     def __init__(self):
-        self.base_url = 'https://vue.ruoyi.vip/'
+        self.base_url = urljoin('https://vue.ruoyi.vip/', '/prod-api/')
         self.session = requests.Session()
         self._session_init()
 
@@ -35,11 +35,12 @@ class RuoyiVueApi:
         重置session
         :return:
         """
+        self.logout()
         self.session.close()
         self.session = requests.Session()
         self._session_init()
 
-    def login(self, username='admin', password='admin123', retry_times=5):
+    def login(self, username='admin', password='admin123', retry_times=7):
         """
         带重试的登录
         验证码识别不是很准！
@@ -51,8 +52,11 @@ class RuoyiVueApi:
         """
         res = self._login(username, password)
         res_json = res.json()
+        n = 1
         for i in range(retry_times):
             if res_json['code'] == 500 and res_json['msg'] == '验证码错误':
+                print(f'Retry:{n}')
+                n += 1
                 res = self._login(username, password)
                 res_json = res.json()
             else:
@@ -66,7 +70,7 @@ class RuoyiVueApi:
         :param password:
         :return:
         """
-        url = urljoin(self.base_url, '/prod-api/login')
+        url = urljoin(self.base_url, 'login')
         uuid, captcha_img_base64 = self._get_captcha_image()
         captcha = calculate_captcha_recognition_get_ruoyi_captcha(captcha_img_base64)
         json_data = {
@@ -84,7 +88,7 @@ class RuoyiVueApi:
         登出
         :return:
         """
-        url = urljoin(self.base_url, '/prod-api/logout')
+        url = urljoin(self.base_url, 'logout')
         res = self.session.post(url)
         return res
 
@@ -93,8 +97,43 @@ class RuoyiVueApi:
         获取信息
         :return:
         """
-        url = urljoin(self.base_url, '/prod-api/getInfo')
+        url = urljoin(self.base_url, 'getInfo')
         res = self.session.get(url)
+        return res
+
+    def list_system_users(self, page_num, page_size):
+        """
+        获取用户列表
+        :param page_num: 页码
+        :param page_size: 页大小
+        :return:
+        """
+        url = urljoin(self.base_url, 'system/user/list')
+        params = {
+            'pageNum': page_num,
+            'pageSize': page_size,
+        }
+        res = self.session.get(url, params=params)
+        return res
+
+    def get_system_user(self, id):
+        """
+        系统管理中获取单个用户信息
+        :param id: 用户id
+        :return:
+        """
+        url = urljoin(self.base_url, f'system/user/{id}')
+        res = self.session.get(url)
+        return res
+
+    def delete_system_user(self, id):
+        """
+        系统管理中删除单个用户信息
+        :param id: 用户id
+        :return:
+        """
+        url = urljoin(self.base_url, f'system/user/{id}')
+        res = self.session.delete(url)
         return res
 
     def _authorization(self, res):
@@ -114,7 +153,7 @@ class RuoyiVueApi:
         获取验证码
         :return: uuid, captcha_img_base64
         """
-        url = urljoin(self.base_url, '/prod-api/captchaImage')
+        url = urljoin(self.base_url, 'captchaImage')
         res = self.session.get(url)
         res_json = res.json()
         uuid = res_json['uuid']
@@ -124,8 +163,6 @@ class RuoyiVueApi:
 
 if __name__ == '__main__':
     api = RuoyiVueApi()
-    print(api.login('asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf', 'aaa').json())
     print(api.login().json())
-    print(api.get_info().json())
-    print(api.logout().json())
-    print(api.get_info().json())
+    # print(api.list_system_users('asdv', 'asd').json())
+    # print(urljoin('prod/', 'aaaa'))
