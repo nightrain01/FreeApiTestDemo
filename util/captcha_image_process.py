@@ -1,57 +1,12 @@
 import base64
 import io
 import os
-import tkinter as tk
 
 import onnxruntime
 import torch
-from PIL import Image, ImageTk
-import ddddocr
+from PIL import Image
 import torchvision.transforms as transforms
 import numpy as np
-
-
-def manual_get_captcha(captcha_img_base64):
-    """
-    手动识别验证码
-    :param captcha_img_base64: 验证码图片base64字符串
-    :return: 验证码结果
-    """
-    window = tk.Tk()
-    img_data = base64.b64decode(captcha_img_base64)
-    img = Image.open(io.BytesIO(img_data))
-    tkimg = ImageTk.PhotoImage(img)
-    img_label = tk.Label(window, image=tkimg)
-    img_label.pack()
-    label = tk.Label(window, text='请输入验证码')
-    label.pack()
-    entry = tk.Entry(window)
-    entry.pack()
-    res = []
-
-    def close_window():
-        res.append(entry.get())
-        window.destroy()
-
-    button = tk.Button(window, text='提交', command=close_window)
-    button.pack()
-    window.mainloop()
-    return res[0]
-
-
-def ocr_get_captcha(captcha_img_base64):
-    """
-    ddddocr识别验证码
-    准不了一点（
-    太g了
-    :param captcha_img_base64: 验证码图片base64字符串
-    :return: 验证码结果
-    """
-    ocr = ddddocr.DdddOcr()
-    img_data = base64.b64decode(captcha_img_base64)
-    res_str = ocr.classification(img_data)
-    res = eval(res_str)
-    return res
 
 
 def calculate_captcha_recognition_get_ruoyi_captcha(captcha_img_base64):
