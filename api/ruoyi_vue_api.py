@@ -2,8 +2,7 @@ from urllib.parse import urljoin
 
 import requests
 
-from util.captcha_image_process import ocr_get_captcha, manual_get_captcha, \
-    calculate_captcha_recognition_get_ruoyi_captcha
+from util.captcha_image_process import calculate_captcha_recognition_get_ruoyi_captcha
 
 
 class RuoyiVueApi:
